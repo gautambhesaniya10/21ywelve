@@ -1,30 +1,28 @@
 import axios from "axios";
 import { MDBBtn } from "mdb-react-ui-kit";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../assets/css/userAlbum.css";
 
-const UserAlbum = () => {
-  const [albumUserData, setAlbumUserData] = useState([]);
+const AlbumView = () => {
+  const [albumPageData, setAlbumPageData] = useState();
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    userAlbumHanlder();
+    albumViewGetAPIHanlder();
   }, []);
 
-  const userAlbumHanlder = async () => {
+  const albumViewGetAPIHanlder = async () => {
     await axios
-      .get(`https://jsonplaceholder.typicode.com/albums/${id}`)
+      .get(`https://jsonplaceholder.typicode.com/photos/${id}`)
       .then(function (response) {
-        setAlbumUserData(response?.data);
+        setAlbumPageData(response?.data);
       });
   };
 
-  console.log("++++++albumUserData", albumUserData);
+  console.log("++++++albumUserData", albumPageData);
 
   return (
     <>
@@ -32,14 +30,14 @@ const UserAlbum = () => {
         <div className="row boxViewAlbum">
           <p className="col-md-12 fs-3">User Detail</p>
           <hr />
-          <p className="col-md-6 fw-bold userDetailText">Title :</p>
-          <p className="col-md-6 userDetailText">{albumUserData?.title}</p>
+          <div style={{ padding: "5%" }}>
+            <img src={albumPageData?.thumbnailUrl} />
+          </div>
+          <p className="col-md-6 fw-bold">Title :</p>
+          <p className="col-md-6">{albumPageData?.title}</p>
         </div>
-        <MDBBtn
-          color="primary"
-          onClick={() => navigate(`/albumpage/${albumUserData?.id}`)}
-        >
-          View Album Page
+        <MDBBtn color="secondary" onClick={() => navigate(-2)}>
+          Home Page
         </MDBBtn>
         <MDBBtn
           color="danger"
@@ -53,4 +51,4 @@ const UserAlbum = () => {
   );
 };
 
-export default UserAlbum;
+export default AlbumView;
