@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { MDBTable, MDBTableHead, MDBTableBody, MDBBtn, MDBIcon, MDBTooltip, MDBSpinner } from "mdb-react-ui-kit";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const Homepage = () => {
 
     const [getUser, setGetUser] = useState();
 
+    console.log("getUser",getUser);
 
     useEffect(() => {
         axios.get(`https://jsonplaceholder.typicode.com/users`)
@@ -26,6 +28,7 @@ const Homepage = () => {
                         <th scope="col">Phone</th>
                         <th scope="col">UserName</th>
                         <th scope="col">Website</th>
+                        <th scope="col">Address</th>
                         <th scope="col">Action</th>
                     </tr>
                 </MDBTableHead>
@@ -38,6 +41,7 @@ const Homepage = () => {
                             <td scope="row">{item.phone}</td>
                             <td scope="row">{item.username}</td>
                             <td scope="row">{item.website}</td>
+                            <td scope="row">{item.address.street} , {item.address.city}</td>
                             <td>
                                 {/* <MDBBtn className="m-1" tag="a" color="none" onClick={() => handleDelete(item.id)}>
                             <MDBTooltip title="Delete" tag="a">
@@ -50,11 +54,11 @@ const Homepage = () => {
                             </MDBTooltip>
                         </Link>{"  "} */}
 
-                                {/* <Link to={`/userInfo/${item.id}`}> */}
+                                <Link to={`/useralbum/${item.id}`}>
                                 <MDBTooltip title="View" tag="a">
                                     <MDBIcon fas icon="eye" style={{ color: "#3b5998", size: "lg", marginBottom: "10px" }} />
                                 </MDBTooltip>
-                                {/* </Link> */}
+                                </Link>
                             </td>
                         </tr>
                     </MDBTableBody>
