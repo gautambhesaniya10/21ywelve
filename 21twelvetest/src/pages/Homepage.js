@@ -3,18 +3,14 @@ import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
-  MDBBtn,
   MDBIcon,
   MDBTooltip,
-  MDBSpinner,
 } from "mdb-react-ui-kit";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
   const [getUser, setGetUser] = useState();
-
-  console.log("getUser", getUser);
 
   useEffect(() => {
     userGetAPIHandler();
@@ -41,7 +37,7 @@ const Homepage = () => {
             <th scope="col">UserName</th>
             <th scope="col">Website</th>
             <th scope="col">Address</th>
-            <th scope="col">Action</th>
+            <th scope="col">ViewUser</th>
           </tr>
         </MDBTableHead>
         {getUser &&

@@ -5,11 +5,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../assets/css/userAlbum.css";
+import ButtonMDBBtn from "../component/Button";
 
 const UserAlbum = () => {
   const [albumUserData, setAlbumUserData] = useState([]);
 
   const { id } = useParams();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,8 +26,6 @@ const UserAlbum = () => {
       });
   };
 
-  console.log("++++++albumUserData", albumUserData);
-
   return (
     <>
       <div style={{ marginTop: "100px" }}>
@@ -35,19 +35,18 @@ const UserAlbum = () => {
           <p className="col-md-6 fw-bold userDetailText">Title :</p>
           <p className="col-md-6 userDetailText">{albumUserData?.title}</p>
         </div>
-        <MDBBtn
-          color="primary"
+        <ButtonMDBBtn
+          color={"primary"}
+          style={{ marginLeft: "10px" }}
           onClick={() => navigate(`/albumpage/${albumUserData?.id}`)}
-        >
-          View Album Page
-        </MDBBtn>
-        <MDBBtn
-          color="danger"
+          name={"View Album Page"}
+        />
+        <ButtonMDBBtn
+          color={"danger"}
           style={{ marginLeft: "10px" }}
           onClick={() => navigate(-1)}
-        >
-          Back
-        </MDBBtn>
+          name={"Back"}
+        />
       </div>
     </>
   );
